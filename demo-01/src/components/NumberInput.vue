@@ -22,6 +22,7 @@
 import { ref, effect, defineComponent } from "vue";
 
 export default defineComponent({
+  emits: ["done"],
   setup(props, ctx) {
     const result = ref("");
     const keyboard = [
@@ -51,7 +52,6 @@ export default defineComponent({
         return (result.value = result.value.substr(0, result.value.length - 1));
       }
     };
-    // TODO:`Extraneous non-emits event` need to fix up in the future
     const complete = () => ctx.emit("done", [true, result.value]);
     const cancel = () => ctx.emit("done", [false]);
     return { result, keyboard, updateResult, complete, cancel };
