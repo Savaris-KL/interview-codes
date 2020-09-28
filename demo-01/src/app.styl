@@ -1,0 +1,38 @@
+.flx
+	display flex
+	&-wrapped
+			flex-wrap wrap
+	&-around
+		justify-content space-between
+
+.flx
+	for col in 3 6 9 12
+		&-col-{col}
+			width (100 / col)%
+
+.text-center
+	text-align center
+
+.size-h3
+	font-size 50px
+.size-h4
+	font-size 40px
+.size-h5
+	font-size 30px
+
+.color-blue
+	color blue
+.color-red
+	color red
+
+.mt
+	for gap in 10 15 20
+		&-{gap}
+			margin-top gap * 1px
+
+.level-top
+	z-index 999
+.level-mid
+	z-index 99
+.level-bot
+	z-index 9
