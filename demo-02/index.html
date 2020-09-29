@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/rotate.css">
+    <script src="./js/jquery-2.0.3.min.js"></script>
+    <script src="./js/layer3.1.1/layer.js"></script>   
+    <script src="./js/lucky-wheel.js"></script>   
+</head>
+<body>
+
+    <div class="top">
+        <img src="./img/top-0604.jpg" alt="">
+    </div>
+    <div class="content cf">
+        <!-- 加载模块 -->
+        <div class="loading">正在加载中...</div>
+        <!-- 验证模块 -->
+        <div class="register-container" style="display: none;">
+            <div class="register-wrapper">            
+                <div class="welcom-txt">
+                    <b><span id="client-name"></span></b>
+                    <b>先生/女士，这是您的专属抽奖页面</b>
+                </div>
+                <div class="welcom-txt" style="font-size: 12px;">
+                    请核对您的<b>手机号码</b>，如有误，请第一时间联系门店修改号码。
+                </div>
+
+                <div class="form-box phone-box" style="margin-top: 20px;">
+                    <div class="form-box-l icon-phone img-center">
+                        <img src="./img/icon-phone.png" alt="">
+                    </div>
+                    <div class="form-box-r" id="client-phone">您的电话</div>
+                </div>
+
+                <div class="form-box">
+                    <div class="form-box-r form-verify-code">
+                        <input type="tel" name="verify-code" placeholder="验证码">
+                    </div>
+                    <div class="form-box-l btn-verify-code">
+                        <a href="javascript:void(0);" id="btn-verify">获取验证码</a>
+                    </div>
+                </div>
+
+                <a class="btn-login img-center" href="javascript:void(0);" id="btn-login">
+                    <img src="./img/btn-login.png" alt="">
+                </a>
+            </div>
+            <div class="prize-box">
+                <div class="table-title" id="table-title">今日已有<span>888</span>人参与现金抽奖</div>
+                <div class="table" id="table">
+                    <div class="table-tr table-h">
+                        <div class="td-time">时间</div>
+                        <div class="td-name">姓名</div>
+                        <div class="td-prize">奖品</div>
+                    </div>
+                    <div class="table-tr">
+                        <div class="td-time">12:11:22</div>
+                        <div class="td-name">陈先生</div>
+                        <div class="td-prize txt-elps">获得<b>688</b>元现金大奖</div>
+                    </div>
+                    <div class="table-tr">
+                        <div class="td-time">12:11:22</div>
+                        <div class="td-name">陈先生</div>
+                        <div class="td-prize txt-elps">获得<b>688</b>元现金大奖</div>
+                    </div>
+                    <div class="table-tr">
+                        <div class="td-time">12:11:22</div>
+                        <div class="td-name">陈先生</div>
+                        <div class="td-prize txt-elps">获得<b>688</b>元现金大奖</div>
+                    </div>
+                    <div class="table-tr">
+                        <div class="td-time">12:11:22</div>
+                        <div class="td-name">陈先生</div>
+                        <div class="td-prize txt-elps">获得<b>688</b>元现金大奖</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 抽奖模块 -->
+        <div class="draw-box" style="display: none;">
+            <img class="tips-1" src="./img/tips-1.png" alt="">
+            <div class="draw-wrapper">
+                <img class="panel" id="panel" src="./img/panel-0604-3.png" alt="">
+                <img class="pointer" id="pointer" src="./img/pointer.png" alt="">
+                <img class="draw-tag" id="draw-tag" src="./img/tag-1.png" alt="">
+
+            </div>
+
+            <div class="rule-box">
+                <img class="rule-title" src="./img/act-rule.png" alt="">
+                <div class="act-time">活动时间：2020年5月25-31日</div>
+                <div class="act-intro">活动期间，在全国尚品宅配店面定家具，交款满10000元即可参与现金红包抽奖，现金红包可享全单折后再直减，红包不兑现，不找零！每1位客户仅享受1次抽奖机会，凭本人所登记的手机验证码进行抽奖！</div>
+            </div>
+
+            <div style="height: 50px;width: 1px;"></div>
+        </div>
+
+        <!-- 抽奖结果模块 -->
+        <div class="draw-res" style="display: none;">
+            <img class="tips-2" src="./img/tips-2.png" alt="">
+            <div class="draw-res-wrapper">
+                <img src="./img/res-bg.png" alt="">
+                <div class="draw-res-money">
+                    <div class="draw-res-money-wrapper">
+                        <div class="draw-res-money-val" id="draw-res-money-val">0</div>
+                        <div class="draw-res-money-unit">元</div>
+                    </div>
+                </div>
+            </div>
+            <div class="rule-box">
+                <img class="rule-title" src="./img/act-rule.png" alt="">
+                <div class="act-time">活动时间：2020年5月25-31日</div>
+                <div class="act-intro">活动期间，在全国尚品宅配店面定家具，交款满10000元即可参与现金红包抽奖，现金红包可享全单折后再直减，红包不兑现，不找零！每1位客户仅享受1次抽奖机会，凭本人所登记的手机验证码进行抽奖！</div>
+            </div>
+        </div>
+
+        <!-- 抽奖结果提示 -->
+        <div class="draw-res-modal">
+            
+        </div>
+    </div>
+
+    <!-- 请完成该部分  -->
+    <!-- 需求：按照设计稿，完成抽奖结果弹窗布局 -->
+    <script>
+        /*
+            所有请求，请自行模拟相关数据，并进行相应的异常处理
+            在该文件中搜索  请完成该部分  并按需求实现相应功能
+            相关切图已放到“img”文件夹，设计稿参考请查看“设计稿”文件夹,如需其他内容可以联系相关人员，或自行查找素材替换
+            可自行安排优先完成的内容
+        */
+        $(window).on('load',function(){
+            ToolKit.init();
+
+            // TODO:mock code
+            // setTimeout(function() {
+            //     $('.register-container').hide();
+            //     ToolKit.renderDrawHtml();
+            // }, 0);
+        });
+
+        //点击登录按钮
+        $(document).on('click','#btn-login',function () {
+            // 请完成该部分
+            /*
+                需求 ：获取默认用户手机号码以及用户输入的验证码，将其提交到到服务器并，成功返回后，隐藏该页面并显示抽奖页面
+                需对输入以及提交数据进行前端验证，并对返回内容做异常处理
+                下面是提交以及返回无异常后执行的代码，请完善其他部分
+            */
+            // set some simple regex formulas
+            var phone = $('#client-phone').html()
+            var verifyCode = $('input[name=verify-code]').val()
+            var phoneReg = /^(138|152|181|186)[0-9]{8}$/
+            var verifyCodeReg = /^[0-9]{4}$/
+            if (!phoneReg.test(phone)) return alert('请输入正确的手机号')
+            if (!verifyCodeReg.test(verifyCode)) return alert('请输入4位的验证码')
+            $('.register-container').hide();
+            ToolKit.requestAjax('test/login', {phone, verifyCode}, function(data) {
+                // assume response is correct
+                ToolKit.renderDrawHtml();
+
+                // if fail
+                // if (data.status === fail) {
+                //     $('.register-container').css({ display: 'block' });
+                // }
+            })
+        });
+
+        //点击 获取验证码
+        $(document).on('click','#btn-verify',function () {
+            if($(this).hasClass('disabled')){
+                return true;
+            }
+            var ori_html = $(this).html();
+            var sec = 59; //重新获取验证码倒计时秒数
+            $(this).addClass('disabled');
+            $(this).html('重新获取'+sec+'S');
+            ToolKit.countDown($('#btn-verify'),sec,ori_html);
+            ToolKit.requestAjax('test','',function(data){
+                //请求验证码
+            });
+        });
+
+        // 点击弹窗的 完成按钮、关闭按钮
+        $(document).on('click','.btn-close,.pop-btn',function () {
+            $('.pop-box,.pop-mask').hide();
+        });
+
+        // 点击开始抽奖
+        $(document).on('click','#pointer',function () {
+            $('#panel').rotate();
+            function calcRotateDegs(val) {
+                var halfPieceDegs = 22.5;
+                var pieceDegs = 45;
+                switch(val){
+                    case 1800 : return halfPieceDegs;
+                    case 1200 : return halfPieceDegs + pieceDegs * 1;
+                    case 1000 : return halfPieceDegs + pieceDegs * 2;
+                    case 800 : return halfPieceDegs + pieceDegs * 3;
+                    case 600 : return halfPieceDegs + pieceDegs * 4;
+                    case 500 : return halfPieceDegs + pieceDegs * 5;
+                    case 300 : return halfPieceDegs + pieceDegs * 6;
+                    case 200 : return halfPieceDegs + pieceDegs * 7;
+                }
+            };
+            // TODO:use throttle function to prevent multiple click times at least time
+            ToolKit.requestAjax('test/lottery/start', '', function(data) {
+                function pick(array) {
+                    var index = Math.floor(Math.random() * array.length);
+                    return array[index]
+                }
+                data = data || pick([600, 800, 1200, 1800]);
+                $('#panel').stopRotate(calcRotateDegs(data), function() {
+                    $('.draw-box').hide();
+                    ToolKit.renderDrawResHtml(data);
+                });
+            });
+            // 请完成该部分 
+            /*
+                需求 ：请求服务器获取抽奖结果，根据结果转盘转到指定结果并停止
+                对可预见的异常返回进行处理
+            */
+
+            /*  转盘转动的参考逻辑  选择其中一种实现即可
+                1、纯数学的办法∂
+                启动、循环方法略
+                停止转盘方法：
+                假设以40帧/秒的速度，一帧转9度，那么1秒就是360度，这是正常转动的角度
+                为了顺滑的停止，Vt = 9度/帧，V0 = 0度/帧；根据公式 Vt^2 - V0^2 = 2*a*s
+                9度/帧 * 9度/帧 - 0度/帧 * 0度/帧 = 2 * a * 180度
+                （81度/帧）/360度 = a    a = 0.225度/帧                
+
+
+                2、css办法，自启自停
+                css设置转盘的transition，例如：transition:all 4s ease;
+                点击开始，就去服务器端请求抽奖结果，获得抽奖结果后，计算一个目标转动角度
+                然后设置转盘的目标角度
+
+                3、animate方法
+                css分别制作一个启动动画、循环动画
+                点击开始，添加启动动画的class，间隔周期时间后移除启动动画并添加循环动画，然后持续监测抽奖结果是否返回
+                检测到返回后，在固定的周期结束后，移除循环动画
+                结束动画是关键：js计算目标角度、停止动画的时间，动态生成停止动画，给转盘添加停止动画
+            */
+
+        });
+
+        var ToolKit = {
+            data : {
+                loading : false,
+                countTimer : null, // 验证码倒计时timer
+                rollingValArr : new Array(),
+                rollingVal : [[80,600,400,300,200,100],[200,1000,900,600,500,400],[200,1800,1200,1000,800,600,500,300]], //三个不同的抽奖列表，逆时针排
+            },
+            init:function(){
+                var that = this;                
+                this.requestAjax('test','',function(data){
+                    // 请求客户信息 手机号 姓名 中奖状态,已中奖列表
+                    // 返回的数据格式如下
+                    data = data ? data : {
+                        status : 1, // 1未抽奖未验证，2未抽奖已验证，3已验证已抽奖
+                        draw_type : 1, //抽奖类型 1:1-3万,2:3-5万,3:5万以上
+                        draw_money : 288,//中奖金额 已中奖则返回，未抽奖可留空
+                        name : '张三',
+                        phone : '18613142773',
+                        list_count : 988,//总共人数
+                        list : [
+                            {
+                                time : '9:10:20',
+                                name : '陈先生',
+                                money : 988,
+                            },
+                            {
+                                time : '14:01:01',
+                                name : '李先生',
+                                money : 1288,
+                            },
+                            {
+                                time : '12:11:02',
+                                name : '王先生',
+                                money : 988,
+                            },
+                            {
+                                time : '13:20:02',
+                                name : '刘先生',
+                                money : 758,
+                            },
+                            {
+                                time : '13:20:02',
+                                name : '刘先生',
+                                money : 758,
+                            },{
+                                time : '13:20:02',
+                                name : '刘先生',
+                                money : 758,
+                            }
+                        ]
+                    };
+
+                    $('.loading').hide();
+                    if(data.status == 1){
+                        that.renderRegisterHtml(data);
+                    }
+                    if(data.status == 2){
+                        that.renderDrawHtml();
+                        that.initRolling(data.draw_type);
+                    }
+                    if(data.status == 3){
+                        that.renderDrawResHtml(data.draw_money);
+                    }
+                });
+
+            },
+            initRolling(type){
+                if(!type){
+                    return false;
+                }
+                this.data.rollingValArr = this.data.rollingVal[type-1];
+                var rollingValArr = this.data.rollingValArr;
+            },            
+            requestAjax:function(url,arg,callback){
+                var that = this;
+                if(url == 'test'){
+                    this.data.loading = false;
+                    callback && callback();
+                    return true;
+                }
+                // every request the prefix of test assumes that is mock
+                if (url === 'test/lottery/start') {
+                    // this.data.loading = false;
+                    setTimeout(function() {
+                        callback && callback();
+                    }, 3000)
+                    return true;
+                }
+                if (/^test/.test(url)) {
+                    // this.data.loading = false;
+                    $('.loading').css({ display: 'block' });
+                    setTimeout(function() {
+                        $('.loading').hide();
+                        callback && callback();
+                    }, 3000)
+                    return true;
+                }
+                if(this.data.loading){
+                    layer.msg('服务器繁忙，请稍后再试！');
+                    return false;
+                }
+                this.data.loading = true;
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: arg,
+                    dataType: "JSON",
+                    success: function (res) {
+                        that.data.loading = false;
+                        // 这个code请根据自己情况进行修改
+                        if(res.code == 200){
+                            callback && callback(res.data);
+                        }else{
+                            layer.msg(re.msg ? res.msg : '返回出错了！');
+                        }
+                    },
+                    fail: function (res) {
+                        that.data.loading = false;
+                        layer.msg(re.msg ? res.msg : '请求出错了！');
+                    }
+                });
+            },
+
+            renderRegisterHtml:function(data){
+                $('#client-name').html(data.name);
+                $('#client-phone').html(data.phone);
+                $('#table-title span').html(data.list_count);
+                $('.register-container').css({
+                    display : 'block'
+                });
+            },
+            countDown(selector,sec,html){       
+                var that = this;         
+                this.data.countTimer = setInterval(function(){
+                    sec = sec ? sec : 60;
+                    sec = parseInt(sec);
+                    sec--;
+                    if(sec <=0 ){
+                        selector.removeClass('disabled');
+                        selector.html(html);
+                        clearInterval(that.data.countTimer);
+                        that.data.countTimer = null;
+                        return true;
+                    }
+                    selector.html('重新获取'+sec+'S')
+                },1000)
+            },
+            renderDrawHtml : function(type){
+                $('.draw-box').css({
+                    'display' : 'block'
+                })
+            },
+            renderDrawResHtml:function(money){
+                $('#draw-res-money-val').html(money);
+                $('.draw-res').css({
+                    'display' : 'block'
+                })
+            }
+        }
+    </script>
+</body>
+</html>
